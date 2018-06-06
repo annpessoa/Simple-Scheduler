@@ -82,6 +82,9 @@ public class JobObject {
 		return formattedDate;
 	}
 	
+	// This is a julian date, it follow the Mddyy format in all numbers
+	// Numbers will be unique for each date so it should help in graphing
+	// This is currently untested so pls be careful!!
 	public int getJulianStart() {
 		String temp = jdf.format(startDate);
 		return Integer.parseInt(temp);
