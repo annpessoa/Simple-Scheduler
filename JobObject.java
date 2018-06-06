@@ -20,7 +20,7 @@ public class JobObject {
 	JobObject(){
 		jobName = "";
 		startDate = new Date();
-		endDate = new Date();
+		//endDate = new Date();
 		jobDuration = 1;
 	}
 	

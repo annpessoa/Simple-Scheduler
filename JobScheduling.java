@@ -10,11 +10,13 @@ public class JobScheduling {
 	int unitsWanted = 2;
 	private SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyy");
 	private Calendar c = Calendar.getInstance();
+	//private 						
 	List<JobObject> jobs = new ArrayList<JobObject>();
-	
 	JobScheduling(){
 		Date d = new Date();
 		c.setTime(d);
+		
+		//Comment this function out if not testing
 		testDates();
 	}
 
@@ -92,35 +94,51 @@ public class JobScheduling {
 					//if no start date
 					if(temp.getStartDate() == null){
 						c.setTime(jobs.get(i-1).getFinishDate());
-						//c.roll(Calendar.DATE, true);
+						c.roll(Calendar.DATE, true);
 						jobs.get(i).setStartDate(c.getTime());
+						temp.setStartDate(c.getTime());
 					}
 					
 					//check if startDate+1+Duration is a later date than previous start date
 						c.setTime(temp.getStartDate());
-						c.add(Calendar.DATE, temp.getJobDuration());
-						
+						//c.roll(Calendar.DATE, true);
+						c.add(Calendar.DATE, temp.getJobDuration()+1);
+						Calendar tempCal = Calendar.getInstance();
+						tempCal.setTime(jobs.get(i-1).getFinishDate());
 						//If it is later
-						if(c.after(jobs.get(i-1))){
+						if(c.after(tempCal)){
 							//if it conflicts, then set current's end date to previous endDate + 1, 
 							//then it sets current start date to current end date - duration.
 							//jobs.get(i).setFinishDate(jobs.get(i-1).getFinishDate());
 							c.setTime(jobs.get(i-1).getFinishDate()); //Calculate finish date
 							c.roll(Calendar.DATE, true); //adds a single day
 
+							
 							//Set finish date
 							jobs.get(i).setFinishDate(c.getTime());
 							
+							tempCal.setTime(jobs.get(i-1).getStartDate());
 							//Figure out new start date
 							c.add(Calendar.DATE, -temp.getJobDuration());
+							if(c.before(tempCal) || c.equals(tempCal)){
+								while(c.before(tempCal) || c.equals(tempCal)){
+								c.roll(Calendar.DATE, true);
+									//c.roll(Calendar.DATE, true);
+								}
+								jobs.get(i).setStartDate(c.getTime());
+								c.add(Calendar.DATE, temp.getJobDuration());
+								jobs.get(i).setFinishDate(c.getTime());
+							} else {
+								jobs.get(i).setStartDate(c.getTime());
+							}
 							
 							//Set new start date.
-							jobs.get(i).setStartDate(c.getTime());
+							
 						} else {
 							//Sets up the schedule if there is no time conflict
-							c.setTime(jobs.get(i-1).getFinishDate());
-							//c.roll(Calendar.DATE, true); //adds one day to end date
-							jobs.get(i).setFinishDate(c.getTime());
+							c.setTime(jobs.get(i-1).getStartDate());
+							c.roll(Calendar.DATE, true); //adds one day to start date
+							jobs.get(i).setStartDate(c.getTime());
 							
 							//Sets end date
 							c.add(Calendar.DATE, temp.getJobDuration());
