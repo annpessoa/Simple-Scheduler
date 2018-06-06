@@ -14,8 +14,8 @@ public class JobObject {
 	
 	JobObject(int duration){
 		jobName = "";
-		startDate = new Date();
-		endDate = new Date();
+		//startDate = new Date();
+		//endDate = new Date();
 		jobDuration = duration;
 	}
 	
@@ -30,11 +30,16 @@ public class JobObject {
 	JobObject(Date startDate, int duration){
 		this.startDate = startDate;
 		
-		Calendar c = null;
+		Calendar c = Calendar.getInstance();
 		c.setTime(startDate);
 		c.add(Calendar.DATE, duration);
 		this.endDate = c.getTime();
 		this.jobDuration = duration;
+	}
+	
+	JobObject(String startdate, int duration) throws ParseException{
+		startDate = sdf.parse(startdate);
+		jobDuration = duration;
 	}
 	
 	
@@ -100,14 +105,14 @@ public class JobObject {
 	}
 	
 	public void changeEndDate(int numOfDays){
-		Calendar c = null;
+		Calendar c = Calendar.getInstance();
 		c.setTime(endDate);
 		c.add(Calendar.DATE, numOfDays);
 		setFinishDate(c.getTime());
 	}
 	
 	public void changeStartDate(int numOfDays){
-		Calendar c = null;
+		Calendar c = Calendar.getInstance();
 		c.setTime(endDate);
 		c.add(Calendar.DATE, numOfDays);
 		setFinishDate(c.getTime());
