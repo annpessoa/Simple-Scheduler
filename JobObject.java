@@ -13,6 +13,7 @@ public class JobObject {
 	//An important formatting to to use for date, will only allow
 	//Strings in that format for formatting
 	private SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyy");
+	private SimpleDateFormat jdf = new SimpleDateFormat("Myydd");
 
 	private int jobDuration;
 	
@@ -80,6 +81,16 @@ public class JobObject {
 		String formattedDate = sdf.format(startDate);
 		return formattedDate;
 	}
+	
+	public int getJulianStart() {
+		String temp = jdf.format(startDate);
+		return Integer.parseInt(temp);
+	}
+	
+	public int getJulianFinish(){
+		String temp = jdf.format(startDate);
+		return Integer.parseInt(temp);
+	}
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
@@ -105,6 +116,8 @@ public class JobObject {
 	public int getJobDuration(){
 		return jobDuration;
 	}
+	
+	
 	
 	public void changeEndDate(int numOfDays){
 		Calendar c = Calendar.getInstance();
