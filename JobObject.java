@@ -4,6 +4,18 @@ import java.util.Calendar;
 import java.util.Date;
 public class JobObject {
 	
+	//taskName
+	private String jobName;
+	//Start date
+	private Date startDate;
+	private Date endDate;
+	
+	//An important formatting to to use for date, will only allow
+	//Strings in that format for formatting
+	private SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyy");
+
+	private int jobDuration;
+	
 	//Empty object
 	JobObject(){
 		jobName = "";
@@ -43,17 +55,7 @@ public class JobObject {
 	}
 	
 	
-	//taskName
-	private String jobName;
-	//Start date
-	private Date startDate;
-	private Date endDate;
-	
-	//An important formatting to to use for date, will only allow
-	//Strings in that format for formatting
-	private SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyy");
 
-	private int jobDuration;
 	
 	//setTaskName
 	public void setJobName(String jName){

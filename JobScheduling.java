@@ -7,16 +7,18 @@ import java.util.List;
 public class JobScheduling {
 	
 	//Put a thing here for units
-	int unitsWanted = 1;
+	int unitsWanted = 2;
 	private SimpleDateFormat sdf = new SimpleDateFormat("M/dd/yyy");
 	private Calendar c = Calendar.getInstance();
+	List<JobObject> jobs = new ArrayList<JobObject>();
 	
 	JobScheduling(){
 		Date d = new Date();
 		c.setTime(d);
+		testDates();
 	}
 
-	List<JobObject> jobs = new ArrayList<JobObject>();
+
 
 	// Put insertion of dates into the array list, only first one should have a start date,
 	// duration after being selected by the user will be multiplied by the amount of
@@ -29,15 +31,14 @@ public class JobScheduling {
 	// Just have it save to the end of the ArrayList.
 	
 	
+	//Used to populate dates withou needing input for testing
 	public void testDates() {
-		System.out.println("I got here");
-		System.out.println(jobs.size());
 		try {
-		jobs.add(new JobObject("6/5/2018", 3*unitsWanted));
+		jobs.add(new JobObject("6/1/2018", 5*unitsWanted));
 
-		jobs.add(new JobObject(1*unitsWanted));
-		jobs.add(new JobObject(10*unitsWanted));
-		jobs.add(new JobObject(1*unitsWanted));
+		jobs.add(new JobObject(3*unitsWanted));
+		jobs.add(new JobObject(6*unitsWanted));
+		jobs.add(new JobObject(2*unitsWanted));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
