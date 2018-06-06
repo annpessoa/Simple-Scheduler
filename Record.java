@@ -19,11 +19,11 @@ public class Record {
 		return duration.get();
 	}
 
-	public void getTaskName(String fDay) {
+	public void setTaskName(String fDay) {
 		taskName.set(fDay);
 	}
 
-	public void getDuration(Double fValue1) {
+	public void setDuration(Double fValue1) {
 		duration.set(fValue1);
 	}
 

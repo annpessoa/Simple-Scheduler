@@ -65,6 +65,7 @@ public class EnterTasksController implements Initializable {
 
 	@FXML
 	private void handleButtonAction(ActionEvent e) throws IOException {
+		
 		//load graph page and change scenes
 		Parent homepage = FXMLLoader.load(getClass().getResource("Graph.fxml"));
 		Scene homepageScene = new Scene(homepage);
